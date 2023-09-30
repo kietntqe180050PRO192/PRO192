@@ -1,4 +1,4 @@
-package ManagerTeacherandStudents;
+package ManagerTeacherandStudent;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package ManagerTeacherandStudents;
+package ManagerTeacherandStudent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,4 +29,6 @@ public class Teacher extends Person {
                 ", address: " + address;
 
     }
+
+
 }
