@@ -1,6 +1,6 @@
 package ManagerTeacherandStudent;
 
-public class Person {
+public abstract class Person {
     protected String email;
     protected String name;
     protected int age;
