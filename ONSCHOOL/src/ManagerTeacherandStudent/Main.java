@@ -8,13 +8,15 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         School school = new School();
-
         while (true) {
+            System.out.println("============================================");
+            System.out.println("MENU!");
             System.out.println("Enter 1: To enter teacher information.");
             System.out.println("Enter 2: To enter student information.");
             System.out.println("Enter 3: To find a teacher.");
             System.out.println("Enter 4: To find a student.");
             System.out.println("Enter 5: To exit the program.");
+            System.out.println("============================================");
             String choose = sc.nextLine();
             switch (choose) {
                 case "1":
@@ -105,5 +107,12 @@ public class Main {
                     return;
                 default:
                     System.out.println("Invalid choice. Please enter a number between 1 and 5.");
-            }}}}
+            }
+            System.out.println("Press 'Enter' to continue..");
+            String next = sc.nextLine();
+            if (next.equalsIgnoreCase("next"))
+                continue;
+        }
+    }
+}
 
