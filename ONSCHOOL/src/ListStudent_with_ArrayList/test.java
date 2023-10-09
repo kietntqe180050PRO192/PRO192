@@ -1,7 +1,6 @@
 package ListStudent_with_ArrayList;
 
 import java.util.Scanner;
-
 public class test {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -19,21 +18,24 @@ public class test {
                   + "7. Remove a student from the list based on student code \n"
                   + "8. Search all students based on Name entered from the keyboard. \n"
                   + "9. Output to the screen a list of students with scores from high to low. \n"
-                  + "0. Exit program.");
+                  + "10. Exit program.");
             String choose = sc.nextLine();
             switch (choose) {
                 case "1":
-                    System.out.println("Enter student's id");
-                    String id = sc.nextLine();
-                    System.out.println("Enter student's name");
-                    String name = sc.nextLine();
-                    System.out.println("Enter student's birth year");
-                    int birthYear = sc.nextInt();
-                    System.out.println("Enter student's medium score");
-                    float mediumScore = sc.nextFloat();
-                    sc.nextLine();
-                    Student student = new Student(id, name, birthYear, mediumScore);
-                    listStudent.addStudent(student);
+                  try {
+                      System.out.println("Enter student's id");
+                      String id = sc.nextLine();
+                      System.out.println("Enter student's name");
+                      String name = sc.nextLine();
+                      System.out.println("Enter student's birth year");
+                      int birthYear = sc.nextInt();
+                      System.out.println("Enter student's medium score");
+                      float mediumScore = sc.nextFloat();
+                      sc.nextLine();
+                      Student student = new Student(id, name, birthYear, mediumScore);
+                      listStudent.addStudent(student);
+                  } catch (NumberFormatException e) {
+                      System.out.println("Invalid input. Please enter a valid number for birth year and medium score.");                  }
                     break;
 
                 case "2":
@@ -55,29 +57,41 @@ public class test {
                 case "6":
                     System.out.println("Enter a id: ");
                     String iD = sc.nextLine();
-                    Student student1 = new Student(iD);
-                    System.out.println("Check students are on the list: "+ listStudent.checkExist(student1));
+                    Student student1 = new Student(iD, true);
+                    System.out.println("Check for student on the list: "+listStudent.checkExist(student1));
                     break;
-
                 case "7":
                     System.out.println("Enter a id: ");
                     String ID = sc.nextLine();
-                    Student student2 = new Student(ID);
-                    System.out.println("Remove students in the list: "+ listStudent.removeStudent(student2));
-                    break;
+                    Student student2 = listStudent.removeStudent(ID);
+                    if (student2 != null)
+                        System.out.println("Student " + student2.getName() + " with ID" +ID + "has been removed from the list.");
+                    else
+                        System.out.println("No student with ID " + ID + " found in the list.");
+                     break;
 
                 case "8":
                     System.out.println("Enter student's name");
                     String nAme = sc.nextLine();
-                    Student student3 = new Student(nAme);
-                    System.out.println("Result: "+ listStudent.findStudent(String.valueOf(student3)));
+                    Student student3 = listStudent.findStudent(nAme);
+                    if (student3!= null)
+                        System.out.println("Found Student " + student3.toString());
+                    else
+                        System.out.println("No student with name " + nAme + " found in the list.");
                     break;
+
+                case "9":
+                    listStudent.arrangeStudent();
+                    listStudent.printfListStudent();
+                    break;
+
+                default:
+                    System.out.println("Please, enter number 1 to 10");
             }
             System.out.println("Press 'Enter' to continue..");
             String next = sc.nextLine();
             if (next.equalsIgnoreCase("next"))
                 continue;
-
         }
     }
 }

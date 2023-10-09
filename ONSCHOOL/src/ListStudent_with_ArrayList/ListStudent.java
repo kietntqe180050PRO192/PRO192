@@ -41,16 +41,19 @@ public class ListStudent {
         return this.list.contains(student);
     }
 
-    public Student removeStudent(Student studentdoce) {
+    public Student removeStudent(String studentId) {
+        Student studentRemove = null;
         for (Student student : list) {
-            if (student.getId().equals(studentdoce)) {
-                list.remove(student);
-                return student;
-            }
+            if (student.getId().equals(studentId)) {
+            studentRemove = student;
+            break;
+           }
         }
-        return studentdoce;
+        if (studentRemove != null) {
+                list.remove(studentRemove);
+        }
+        return studentRemove;
     }
-
 
     public Student findStudent (String name) {
         for (Student student : list ) {
@@ -64,7 +67,7 @@ public class ListStudent {
         Collections.sort(this.list, new Comparator<Student>() {
             @Override
             public int compare(Student student1, Student student2) {
-                if (student1.getMediumScore() < student2.getMediumScore())
+                if (student1.getMediumScore() <student2.getMediumScore())
                     return -1;
                 else if (student1.getMediumScore() > student2.getMediumScore())
                     return 1;

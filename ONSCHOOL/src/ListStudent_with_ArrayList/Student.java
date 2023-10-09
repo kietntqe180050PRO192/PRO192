@@ -1,5 +1,7 @@
 package ListStudent_with_ArrayList;
 
+import java.util.Objects;
+
 public class Student implements Comparable<Student> {
     private String id;
     private String name;
@@ -13,6 +15,16 @@ public class Student implements Comparable<Student> {
                 ", name = " + name +
                 ", birthYear = " + birthYear +
                 ", mediumScore = " + mediumScore;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Student otherStudent = (Student) obj;
+        return Objects.equals(id, otherStudent.id);
     }
 
     public Student(String id, String name, int birthYear, float mediumScore) {
