@@ -27,7 +27,7 @@ public class ViDuTaoTapTinVaThuMuc {
         File file1 = new File("D:\\CSI\\Directory_1\\Vidu1.txt");
         try {
             file1.createNewFile();
-        } catch (IOException e) {
+        } catch (Exception e) {
             //ko có quyền tạo tệp tin
             // ổ cứng ầy
             // đường dẫn sai

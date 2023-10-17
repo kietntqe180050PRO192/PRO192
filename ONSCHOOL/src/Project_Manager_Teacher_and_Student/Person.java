@@ -1,13 +1,13 @@
 package Project_Manager_Teacher_and_Student;
 
 public abstract class Person {
-    protected String email;
+    private String email;
 
-    protected String name;
-    protected int age;
-    protected String gender;
-    protected String phoneNumber;
-    protected String address;
+    private String name;
+    private int age;
+    private String gender;
+    private String phoneNumber;
+    private String address;
 
     public String getEmail() {
         return email;

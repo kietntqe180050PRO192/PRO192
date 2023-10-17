@@ -11,13 +11,16 @@ public class Student extends Person {
     @Override
     public String toString() {
         return "Teacher information: " +
-                " email: " + email +
-                ", name: " + name +
-                ", age: " + age +
-                ", gender: " + gender +
-                ", phonenumber: " + phoneNumber +
-                ", address: " + address +
-                ", major: " + major;
+                " email: " + getEmail() +
+                ", name: " + getName() +
+                ", age: " + getAge() +
+                ", gender: " + getGender() +
+                ", phonenumber: " + getPhoneNumber() +
+                ", address: " + getAddress() +
+                ", major: " + major +
+                ", course: " + getMajorCourses();
+
+
     }
 
     public String getMajor() {

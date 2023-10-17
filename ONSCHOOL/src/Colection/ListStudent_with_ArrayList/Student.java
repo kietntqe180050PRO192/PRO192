@@ -1,8 +1,9 @@
 package Colection.ListStudent_with_ArrayList;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Student implements Comparable<Student> {
+public class Student implements Comparable<Student>, Serializable {
     private String id;
     private String name;
     private int birthYear;

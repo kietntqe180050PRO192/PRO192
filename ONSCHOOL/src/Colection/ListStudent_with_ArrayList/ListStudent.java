@@ -1,8 +1,10 @@
 package Colection.ListStudent_with_ArrayList;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class ListStudent {
     private ArrayList<Student> list;
@@ -76,5 +78,52 @@ public class ListStudent {
             }
         });
     }
+
+    public void writeDataFile (File file) {
+        try {
+            // Tạo một đối tượng OutputStream để ghi dữ liệu vào file.
+            OutputStream os = new FileOutputStream(file);
+            // Tạo một đối tượng ObjectOutputStream để ghi các đối tượng vào luồng dữ liệu.
+            ObjectOutputStream oss = new ObjectOutputStream(os);
+
+            for (Student student : list) {
+                // Ghi đối tượng student vào luồng.
+                oss.writeObject(student);
+            }
+            // Đẩy tất cả dữ liệu đã ghi vào luồng xuống file.
+            oss.flush();
+            //  Đóng luồng sau khi đã ghi xong
+            oss.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readDataFile (File file) {
+        try {
+            // Tạo một đối tượng InputStream để đọc dữ liệu từ file.
+            InputStream is = new FileInputStream(file);
+            // Tạo một đối tượng ObjectInputStream để đọc các đối tượng từ luồng dữ liệu.
+            ObjectInputStream ois = new ObjectInputStream(is);
+            Student student = null;
+            while (true) {
+                // Đọc một đối tượng từ luồng và gán cho biến objects.
+                Object objects = ois.readObject();
+                if (objects == null)
+                    break;
+                if (objects != null) {
+                    //  Ép kiểu biến objects về kiểu Student và gán cho biến student.
+                    student = (Student) objects;
+                    this.list.add(student);
+                }
+            }
+
+            ois.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
 

@@ -18,6 +18,7 @@ public class Main {
             String choose = sc.nextLine();
             switch (choose) {
                 case "1":
+                    System.out.println("Choose an option: ");
                     System.out.println("Enter a: To enter information of teacher. ");
                     System.out.println("Enter b: To enter information of student. ");
                     String option = sc.nextLine();
@@ -29,25 +30,24 @@ public class Main {
                             String teacherName = sc.nextLine();
                             System.out.println("Enter teacher's age: ");
                             int teacherAge = sc.nextInt();
-                            sc.nextLine();
+                            sc.nextLine(); // trả về dòng tt trong chuỗi, di chuyển đến dòng kế tiếp
                             System.out.println("Enter teacher's gender: ");
                             String teacherGender = sc.nextLine();
                             System.out.println("Enter teacher's phonenumber: ");
                             String teacherPhoneNumber = sc.nextLine();
                             System.out.println("Enter teacher's address: ");
                             String teacherAddress = sc.nextLine();
-                            Teacher teacher = new Teacher(teacherEmail, teacherName, teacherAge, teacherGender, teacherPhoneNumber,
-                                                          teacherAddress);
-                            school.addTeacher(teacher);
+                            Teacher teacher = new Teacher(teacherEmail, teacherName, teacherAge, teacherGender, teacherPhoneNumber, teacherAddress);
 
+                            school.addTeacher(teacher);
                             System.out.println(teacher.toString());
 
                             System.out.println("Enter courses to be taught by " + teacher.getName() + " (or enter 'exit' to finnish)");
-                            String course = sc.nextLine();
-                            while (!course.equalsIgnoreCase("exit")) {
-                                teacher.addCourse(course);
+                            String courseTeacher = sc.nextLine();
+                            while (!courseTeacher.equalsIgnoreCase("exit")) {  // vòng lặp while này sẽ thực hiện khi biến courseTeacher ng dùng nhập khác "exit" và đó là khóa học
+                                teacher.addCourse(courseTeacher);
                                 System.out.println("Enter next course name (or enter 'exit' to finnish): ");
-                                course = sc.nextLine();
+                                courseTeacher = sc.nextLine();
                             }
                             teacher.displayCourses();
                             break;
@@ -67,16 +67,14 @@ public class Main {
                             String studentAddress = sc.nextLine();
                             System.out.println("Enter student's major: ");
                             String studentMajor = sc.nextLine();
-                            Student student = new Student(studentEmail, studentName, studentAge, studentGender, studentPhoneNumber,
-                                                          studentAddress, studentMajor);
+                            Student student = new Student(studentEmail, studentName, studentAge, studentGender, studentPhoneNumber, studentAddress, studentMajor);
 
                             school.addStudent(student);
-
                             System.out.println(student.toString());
 
                             System.out.println("Enter the course are studying " + student.getName() + " (or enter 'exit' to finnish)");
                             String courseStudent = sc.nextLine();
-                            while (!courseStudent.equalsIgnoreCase("exit")) {
+                            while (!courseStudent.equalsIgnoreCase("exit")) { // vòng lặp while này sẽ thực hiện khi biến courseStudent ng dùng nhập khác "exit" và đó là khóa học
                                 student.addMajorCourses(studentMajor, courseStudent);
                                 System.out.println("Enter next course name (or 'exit' to finish): ");
                                 courseStudent = sc.nextLine();
@@ -88,6 +86,7 @@ public class Main {
                     }
                     break;
                 case "2":
+                    System.out.println("Choose an option: ");
                     System.out.println("Enter a: Displays all information teacher currently on the list.");
                     System.out.println("Enter b: Displays all information student currently on the list.");
                     String option2 = sc.nextLine();
@@ -104,8 +103,9 @@ public class Main {
                     break;
 
                 case "3":
-                    System.out.println("Enter a: To find a teacher by email or course. ");
-                    System.out.println("Enter b: To find a student by email or major. ");
+                    System.out.println("Choose an option: ");
+                    System.out.println("Enter a: To find a teacher by email and course. ");
+                    System.out.println("Enter b: To find a student by email and major. ");
                     String option3 = sc.nextLine();
                     switch (option3) {
                         case "a":
@@ -113,7 +113,7 @@ public class Main {
                             String emailTeacher = sc.nextLine();
                             System.out.println("Enter teacher's name of course: ");
                             String courseTeacher = sc.nextLine();
-                            Teacher foundTeacher = school.findTeacher(emailTeacher, courseTeacher);
+                            Teacher foundTeacher = school.findTeacher(emailTeacher, courseTeacher); // Kq của method findTeacher dc gán cho biến foundTeacher
                             if (foundTeacher != null)
                                 System.out.println("Found teacher: " + foundTeacher);
                             else
@@ -125,7 +125,7 @@ public class Main {
                             String emailStudent = sc.nextLine();
                             System.out.println("Enter student's major: ");
                             String majorStudent = sc.nextLine();
-                            Student foundStudent = school.findStudent(emailStudent, majorStudent);
+                            Student foundStudent = school.findStudent(emailStudent, majorStudent); // Kq của method findStutdent dc gán cho biến foundStudent
                             if (foundStudent != null)
                                 System.out.println("Found teacher: " + foundStudent);
                             else
@@ -137,6 +137,8 @@ public class Main {
                     break;
 
                 case "4":
+                    System.out.println("Note: you change the information you want and enter the original information of the information you don't want!");
+                    System.out.println("Choose an option: ");
                     System.out.println("Enter a: Edit information teacher.");
                     System.out.println("Enter b: Edit information student.");
                     String option4 = sc.nextLine();
@@ -144,12 +146,13 @@ public class Main {
                         case "a":
                             System.out.println("Enter teacher's email:");
                             String emailTeacher = sc.nextLine();
-                            System.out.println("Enter teacher's course:");
+                            System.out.println("Enter a teacher's course:");
                             String cousreTeacher = sc.nextLine();
                             Teacher teacher = school.findTeacher(emailTeacher, cousreTeacher);
                             if (teacher == null) {
                                 System.out.println("No teacher found with the given email and course.");
                             } else {
+                                school.dislpayTeacher();
                                 System.out.println("Enter teacher's new email:");
                                 String newEmailTeacher = sc.nextLine();
                                 System.out.println("Enter teacher's new name:");
@@ -163,6 +166,9 @@ public class Main {
                                 String newPhoneNumberTeacher = sc.nextLine();
                                 System.out.println("Enter teacher's new adrress:");
                                 String newAdrressTeacher = sc.nextLine();
+                                System.out.println("Enter c: Add another course. ");
+                                System.out.println("Enter d: Change old course to new course. ");
+                                String choose1 = sc.nextLine();
 
                                 List<String> newCousresTeacher = new ArrayList<>();
                                 while (true) {
@@ -172,12 +178,11 @@ public class Main {
                                         break;
                                     newCousresTeacher.add(newCourseTeacher);
                                 }
-                                school.editTeacher(emailTeacher, cousreTeacher, newEmailTeacher, newNameTeacher, newAgeTeacher,
-                                        newGenderTeacher, newPhoneNumberTeacher, newAdrressTeacher, newCousresTeacher);
+            ;
+                                school.editTeacher(emailTeacher, cousreTeacher, newEmailTeacher, newNameTeacher, newAgeTeacher, newGenderTeacher, newPhoneNumberTeacher, newAdrressTeacher, newCousresTeacher, choose1);
                                         teacher.displayCourses();
                                         school.dislpayTeacher();
                                     }
-
                             break;
 
                         case "b":
@@ -189,6 +194,7 @@ public class Main {
                             if (student == null) {
                                 System.out.println("No student found with the given email and major.");
                             } else {
+                                school.dislpayStudent();
                                 System.out.println("Enter student's new email:");
                                 String newEmailStudent = sc.nextLine();
                                 System.out.println("Enter student's new name:");
@@ -202,23 +208,34 @@ public class Main {
                                 String newPhoneNumberStudent = sc.nextLine();
                                 System.out.println("Enter student's new adrress:");
                                 String newAdrressStudent = sc.nextLine();
-                                System.out.println("Enter student's new major:");
-                                String newmajorStudent = sc.nextLine();
 
                                 Map<String, List<String>> newMajorCourseStudent = new HashMap<>();
                                 List<String> newCoursesStudent = new ArrayList<>();
+
                                 while (true) {
                                     System.out.println("Enter a new course (or 'done' to finish)");
                                     String newCourseStudent = sc.nextLine();
                                     if (newCourseStudent.equalsIgnoreCase("done"))
                                         break;
                                         newCoursesStudent.add(newCourseStudent);
-                                        newMajorCourseStudent.put(newmajorStudent, newCoursesStudent);
+                                        newMajorCourseStudent.put(majorStudent, newCoursesStudent);
                                 }
-                                school.editStudent(emailStudent, majorStudent, newEmailStudent, newNameStudent, newAgeStudent,
-                                                   newGenderStudent, newPhoneNumberStudent, newAdrressStudent, newmajorStudent,
-                                                    newMajorCourseStudent);
+                                System.out.println("Choose an option: ");
+                                System.out.println("Enter c: Keep the current major and add the new courses to the current courses");
+                                System.out.println("Enter d: Keep the current major, remove the current courses and add the new courses");
+                                System.out.println("Enter e: Set a new major and add the new courses");
+
+                                String choose2 = sc.nextLine();
+                                if (choose2.equalsIgnoreCase("e")) {
+                                    System.out.println("Enter student's new major: ");
+                                    String newMajorStudent = sc.nextLine();
+                                    school.editStudent(emailStudent, majorStudent, newEmailStudent, newNameStudent, newAgeStudent, newGenderStudent, newPhoneNumberStudent, newAdrressStudent, newMajorStudent, newMajorCourseStudent, choose2);
+                                }
+
+                                school.editStudent(emailStudent, majorStudent, newEmailStudent, newNameStudent, newAgeStudent, newGenderStudent, newPhoneNumberStudent, newAdrressStudent, majorStudent, newMajorCourseStudent, choose2);
+                                System.out.println("Student information after updating.");
                                 student.displayMajorCouurses();
+                                school.dislpayStudent();
                               }
                                  break;
                         default:

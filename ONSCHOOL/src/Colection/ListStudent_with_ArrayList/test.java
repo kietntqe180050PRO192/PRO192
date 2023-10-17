@@ -1,5 +1,6 @@
 package Colection.ListStudent_with_ArrayList;
 
+import java.io.File;
 import java.util.Scanner;
 public class test {
     public static void main(String[] args) {
@@ -18,7 +19,9 @@ public class test {
                   + "7. Remove a student from the list based on student code \n"
                   + "8. Search all students based on Name entered from the keyboard. \n"
                   + "9. Output to the screen a list of students with scores from high to low. \n"
-                  + "10. Exit program.");
+                  + "10. To save list student. \n "
+                  + "11. To read list student in file. \n"
+                  + "12. Exit program.");
             String choose = sc.nextLine();
             switch (choose) {
                 case "1":
@@ -85,8 +88,21 @@ public class test {
                     listStudent.printfListStudent();
                     break;
 
+                case "10":
+                    System.out.println("Enter name file: ");
+                    String nameFile = sc.nextLine();
+                    File f = new File(nameFile);
+                    listStudent.writeDataFile(f);
+                    break;
+
+                case "11":
+                    System.out.println("Enter name file: ");
+                    String nameFile1 = sc.nextLine();
+                    File f1 = new File(nameFile1);
+                    listStudent.readDataFile(f1);
+                    break;
                 default:
-                    System.out.println("Please, enter number 1 to 10");
+                    System.out.println("Please, enter number 1 to 12");
             }
             System.out.println("Press 'Enter' to continue..");
             String next = sc.nextLine();
@@ -95,3 +111,4 @@ public class test {
         }
     }
 }
+ // D:\ViDu\Ahihi\save.txt

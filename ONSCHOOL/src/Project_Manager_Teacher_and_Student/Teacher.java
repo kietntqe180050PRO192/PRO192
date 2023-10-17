@@ -30,12 +30,13 @@ public class Teacher extends Person {
     @Override
     public String toString() {
         return "Teacher information: " +
-                " email: " + email +
-                ", name: " + name +
-                ", age: " + age +
-                ", gender: " + gender +
-                ", phonenumber: " + phoneNumber +
-                ", address: " + address;
+                " email: " + getEmail() +
+                ", name: " + getName() +
+                ", age: " + getAge() +
+                ", gender: " + getGender() +
+                ", phonenumber: " + getPhoneNumber() +
+                ", address: " + getAddress() +
+                ", teach sublect: " + getCourses();
     }
 
 

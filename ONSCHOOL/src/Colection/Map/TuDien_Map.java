@@ -1,4 +1,4 @@
-package Colection;
+package Colection.Map;
 
 import java.util.*;
 
