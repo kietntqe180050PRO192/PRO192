@@ -1,9 +1,10 @@
 package Project_Manager_Teacher_and_Student;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Teacher extends Person {
+public class Teacher extends Person implements Serializable {
     private List<String> courses;
 
     public List<String> getCourses() {
@@ -12,6 +13,9 @@ public class Teacher extends Person {
 
     public void setCourses(List<String> courses) {
         this.courses = courses;
+    }
+
+    public Teacher() {
     }
 
     public Teacher(String email, String name, int age, String gender, String phoneNumber, String address) {
@@ -36,11 +40,9 @@ public class Teacher extends Person {
                 ", gender: " + getGender() +
                 ", phonenumber: " + getPhoneNumber() +
                 ", address: " + getAddress() +
-                ", teach sublect: " + getCourses();
+                ", teach subject: " + getCourses();
     }
-
-
-    }
+}
 
 
 

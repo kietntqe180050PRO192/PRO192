@@ -1,5 +1,7 @@
 package Project_Manager_Teacher_and_Student;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Main {
@@ -13,7 +15,8 @@ public class Main {
             System.out.println("| Enter 2: Displays all information (Teacher or Student) currently on the list.     |");
             System.out.println("| Enter 3: To find a (Teacher or Student).                                          |");
             System.out.println("| Enter 4: Edit information (Teacher or Student).                                   |");
-            System.out.println("| Enter 5: To exit the program.                                                     |");
+            System.out.println("| Enter 5: Download information to file of teacher or student.                      |");
+            System.out.println("| Enter 0: To exit the program.                                                     |");
             System.out.println("-------------------------------------------------------------------------------------");
             String choose = sc.nextLine();
             switch (choose) {
@@ -30,7 +33,7 @@ public class Main {
                             String teacherName = sc.nextLine();
                             System.out.println("Enter teacher's age: ");
                             int teacherAge = sc.nextInt();
-                            sc.nextLine(); // trả về dòng tt trong chuỗi, di chuyển đến dòng kế tiếp
+                            sc.nextLine();                                                                              // trả về dòng tt trong chuỗi, di chuyển đến dòng kế tiếp
                             System.out.println("Enter teacher's gender: ");
                             String teacherGender = sc.nextLine();
                             System.out.println("Enter teacher's phonenumber: ");
@@ -44,13 +47,14 @@ public class Main {
 
                             System.out.println("Enter courses to be taught by " + teacher.getName() + " (or enter 'exit' to finnish)");
                             String courseTeacher = sc.nextLine();
-                            while (!courseTeacher.equalsIgnoreCase("exit")) {  // vòng lặp while này sẽ thực hiện khi biến courseTeacher ng dùng nhập khác "exit" và đó là khóa học
+                            while (!courseTeacher.equalsIgnoreCase("exit")) {                                // vòng lặp while này sẽ thực hiện khi biến courseTeacher ng dùng nhập khác "exit" và đó là khóa học
                                 teacher.addCourse(courseTeacher);
                                 System.out.println("Enter next course name (or enter 'exit' to finnish): ");
                                 courseTeacher = sc.nextLine();
                             }
                             teacher.displayCourses();
                             break;
+
                         case "b":
                             System.out.println("Enter stuent's email: ");
                             String studentEmail = sc.nextLine();
@@ -74,7 +78,7 @@ public class Main {
 
                             System.out.println("Enter the course are studying " + student.getName() + " (or enter 'exit' to finnish)");
                             String courseStudent = sc.nextLine();
-                            while (!courseStudent.equalsIgnoreCase("exit")) { // vòng lặp while này sẽ thực hiện khi biến courseStudent ng dùng nhập khác "exit" và đó là khóa học
+                            while (!courseStudent.equalsIgnoreCase("exit")) {                                // vòng lặp while này sẽ thực hiện khi biến courseStudent ng dùng nhập khác "exit" và đó là khóa học
                                 student.addMajorCourses(studentMajor, courseStudent);
                                 System.out.println("Enter next course name (or 'exit' to finish): ");
                                 courseStudent = sc.nextLine();
@@ -94,6 +98,7 @@ public class Main {
                         case "a":
                             school.dislpayTeacher();
                             break;
+
                         case "b":
                             school.dislpayStudent();
                             break;
@@ -113,7 +118,7 @@ public class Main {
                             String emailTeacher = sc.nextLine();
                             System.out.println("Enter teacher's name of course: ");
                             String courseTeacher = sc.nextLine();
-                            Teacher foundTeacher = school.findTeacher(emailTeacher, courseTeacher); // Kq của method findTeacher dc gán cho biến foundTeacher
+                            Teacher foundTeacher = school.findTeacher(emailTeacher, courseTeacher);                     // Kq của method findTeacher dc gán cho biến foundTeacher
                             if (foundTeacher != null)
                                 System.out.println("Found teacher: " + foundTeacher);
                             else
@@ -125,7 +130,7 @@ public class Main {
                             String emailStudent = sc.nextLine();
                             System.out.println("Enter student's major: ");
                             String majorStudent = sc.nextLine();
-                            Student foundStudent = school.findStudent(emailStudent, majorStudent); // Kq của method findStutdent dc gán cho biến foundStudent
+                            Student foundStudent = school.findStudent(emailStudent, majorStudent);                      // Kq của method findStutdent dc gán cho biến foundStudent
                             if (foundStudent != null)
                                 System.out.println("Found teacher: " + foundStudent);
                             else
@@ -178,11 +183,11 @@ public class Main {
                                         break;
                                     newCousresTeacher.add(newCourseTeacher);
                                 }
-            ;
+                                ;
                                 school.editTeacher(emailTeacher, cousreTeacher, newEmailTeacher, newNameTeacher, newAgeTeacher, newGenderTeacher, newPhoneNumberTeacher, newAdrressTeacher, newCousresTeacher, choose1);
-                                        teacher.displayCourses();
-                                        school.dislpayTeacher();
-                                    }
+                                teacher.displayCourses();
+                                school.dislpayTeacher();
+                            }
                             break;
 
                         case "b":
@@ -217,8 +222,8 @@ public class Main {
                                     String newCourseStudent = sc.nextLine();
                                     if (newCourseStudent.equalsIgnoreCase("done"))
                                         break;
-                                        newCoursesStudent.add(newCourseStudent);
-                                        newMajorCourseStudent.put(majorStudent, newCoursesStudent);
+                                    newCoursesStudent.add(newCourseStudent);
+                                    newMajorCourseStudent.put(majorStudent, newCoursesStudent);
                                 }
                                 System.out.println("Choose an option: ");
                                 System.out.println("Enter c: Keep the current major and add the new courses to the current courses");
@@ -236,18 +241,57 @@ public class Main {
                                 System.out.println("Student information after updating.");
                                 student.displayMajorCouurses();
                                 school.dislpayStudent();
-                              }
-                                 break;
-                        default:
-                            System.out.println("Invalid choice. Please enter 'a' or 'b'.");
                             }
                             break;
+                        default:
+                            System.out.println("Invalid choice. Please enter 'a' or 'b'.");
+                    }
+                    break;
 
                 case "5":
+                    System.out.println("Choose an option: ");
+                    System.out.println("Enter a: Download information teacher to file.");
+                    System.out.println("Enter b: Download information student to file.");
+                    String option5 = sc.nextLine();
+                    switch (option5) {
+                        case "a":
+                            File fileTeacher = new File("D:\\QUẢN LÍ GIÁO VIÊN VÀ SINH VIÊN\\Giáo viên\\Giáo viên.txt");
+                            school.dowloadDataTeacherFile(fileTeacher);
+                            break;
+
+                        case "b":
+                            File fileStudent = new File("D:\\QUẢN LÍ GIÁO VIÊN VÀ SINH VIÊN\\SInh viên\\Sinh viên.txt");
+                            school.dowloadDataStudentFile(fileStudent);
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Please enter 'a' or 'b'.");
+                    }
+                    break;
+              /*  case "6":
+                    System.out.println("Choose an option: ");
+                    System.out.println("Enter a: Load teacher information from file.");
+                    System.out.println("Enter b: Load student information from file.");
+                    String option6 = sc.nextLine();
+                    switch (option6) {
+                        case "a":
+                            File fileTeacher = new File("D:\\QUẢN LÍ GIÁO VIÊN VÀ SINH VIÊN\\Giáo viên\\Giáo viên.txt");
+                            school.loadDataTeacherFile(fileTeacher);
+                            break;
+
+                        case "b":
+                            File fileStudent = new File("D:\\QUẢN LÍ GIÁO VIÊN VÀ SINH VIÊN\\SInh viên\\Sinh viên.txt");
+                            school.loadDataStudentFile(fileStudent);
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Please enter 'a' or 'b'.");
+                    }
+                    break;*/
+
+                case "0":
                     sc.close();
                     return;
                 default:
-                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                    System.out.println("Invalid choice. Please enter a number between 0 and 5.");
             }
             System.out.println("Press 'Enter' to continue..");
             String next = sc.nextLine();

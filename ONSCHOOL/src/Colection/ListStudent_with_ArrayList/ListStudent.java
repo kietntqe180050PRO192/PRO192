@@ -117,7 +117,6 @@ public class ListStudent {
                     this.list.add(student);
                 }
             }
-
             ois.close();
         } catch (Exception e) {
             e.printStackTrace();

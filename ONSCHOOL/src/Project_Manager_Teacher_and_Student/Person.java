@@ -1,6 +1,8 @@
 package Project_Manager_Teacher_and_Student;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable {
     private String email;
 
     private String name;
@@ -65,4 +67,6 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
+
+    public Person () {}
 }

@@ -1,16 +1,18 @@
 package Project_Manager_Teacher_and_Student;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Student extends Person {
+public class Student extends Person implements Serializable {
     private String major;
     private Map<String, List<String>> majorCourses;
 
     @Override
     public String toString() {
-        return "Teacher information: " +
+        return "Student information: " +
                 " email: " + getEmail() +
                 ", name: " + getName() +
                 ", age: " + getAge() +
@@ -19,8 +21,6 @@ public class Student extends Person {
                 ", address: " + getAddress() +
                 ", major: " + major +
                 ", course: " + getMajorCourses();
-
-
     }
 
     public String getMajor() {
@@ -37,13 +37,15 @@ public class Student extends Person {
         this.majorCourses = new HashMap<String, List<String>>();
     }
 
-    public void addMajorCourses(String major, String course) {
-        if (this.majorCourses.containsKey(major))
-            this.majorCourses.get(major).add(course);
+    public Student () {}
+
+    public void addMajorCourses(String major, String course) {                                                          // Add các course vào major
+        if (this.majorCourses.containsKey(major))                                                                       // If key là (major) có trong danh sách Map không
+            this.majorCourses.get(major).add(course);                                                                   // nếu có thì thêm value ( List courses) vào key (major)
         else {
             List<String> courses = new ArrayList<>();
             courses.add(course);
-            this.majorCourses.put(major, courses);
+            this.majorCourses.put(major, courses);                                                                      // nếu ko thì put(thêm) key (major) và  value (course) vào Map
         }
     }
 
